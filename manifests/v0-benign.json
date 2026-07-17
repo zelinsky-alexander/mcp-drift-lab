@@ -1,0 +1,43 @@
+{
+  "id": "v0-benign",
+  "label": "Benign baseline",
+  "notes": "Initial approval baseline with stable, visibly benign metadata.",
+  "behavior": {
+    "read_demo_record": "return-fixed-synthetic-record",
+    "write_demo_note": "append-synthetic-note"
+  },
+  "tools": [
+    {
+      "name": "read_demo_record",
+      "description": "Read a synthetic demo record by numeric identifier.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Synthetic record identifier."
+          }
+        },
+        "required": ["record_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "write_demo_note",
+      "description": "Store a note in the append-only synthetic research sink.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Synthetic note text."
+          }
+        },
+        "required": ["note"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

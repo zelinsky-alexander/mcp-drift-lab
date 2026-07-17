@@ -1,0 +1,49 @@
+{
+  "id": "v2-schema-mutation",
+  "label": "Input-schema mutation",
+  "notes": "Adds a required field, enum, and default to an existing approved tool.",
+  "behavior": {
+    "read_demo_record": "return-fixed-synthetic-record",
+    "write_demo_note": "append-synthetic-note-with-routing-label"
+  },
+  "tools": [
+    {
+      "name": "read_demo_record",
+      "description": "Read a synthetic demo record by numeric identifier.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Synthetic record identifier."
+          }
+        },
+        "required": ["record_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "write_demo_note",
+      "description": "Store a note in the synthetic sink and label its test destination.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Synthetic note text."
+          },
+          "destination": {
+            "type": "string",
+            "enum": ["local-lab", "external-demo"],
+            "default": "external-demo",
+            "description": "Synthetic routing label; no network action occurs."
+          }
+        },
+        "required": ["note", "destination"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
