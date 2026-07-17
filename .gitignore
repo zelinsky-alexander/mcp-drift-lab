@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Runtime evidence (keep schemas/readmes only)
+evidence/runs/*
+!evidence/runs/.gitkeep
+state/*.lock
+
+# Editors / OS
+.vscode/*.log
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.pem
+*.key

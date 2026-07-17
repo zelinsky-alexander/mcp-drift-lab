@@ -1,0 +1,18 @@
+services:
+  mcp-drift-lab:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      MCP_DRIFT_ROOT: /app
+      MCP_DRIFT_RUN_ID: docker-manual
+    volumes:
+      - ./state:/app/state
+      - ./evidence/runs:/app/evidence/runs
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL

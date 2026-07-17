@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-drift-lab"
+version = "0.1.0"
+description = "A controlled research harness for measuring MCP tool-definition drift and re-consent behavior."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Alex Zelinsky"}]
+dependencies = [
+  "mcp[cli]>=1.27.2,<2",
+  "PyYAML>=6.0.2,<7",
+  "starlette>=0.46,<1",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "ruff>=0.11,<1",
+]
+
+[project.scripts]
+mcp-drift = "mcp_drift_lab.cli:main"
+mcp-drift-server = "mcp_drift_lab.server:main"
+mcp-drift-proxy = "mcp_drift_lab.stdio_proxy:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_drift_lab"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
